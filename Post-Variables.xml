@@ -1,0 +1,44 @@
+<data>
+        <suite>
+                <!--Here brigeToken and User are the jewel credentials-->
+                <project-name>GEMECO-API-PY</project-name>
+                <report-name>Pyprest Scenarios</report-name>
+                <environment>beta</environment>
+                <mode>optimize</mode>
+                <enter-point>https://apis-beta.gemecosystem.com</enter-point>
+                <jewel-user>user</jewel-user>
+                <jewel-bridge-token>bridge_token</jewel-bridge-token>
+        </suite>
+        <!--In this testcase we are covering post variables in which response of an api is stored in a suite varaible which can be used anywhere in the suite.
+        Syntax: set $[#SUITE.variable_name]=$[#response.fieldName];-->
+        <testcases>
+            <testcase>
+            <name>PostVariables_Testcase</name>
+            <category>Scenario testcase</category>
+            <run_flag>Y</run_flag>
+            <api>https://apis-beta.gemecosystem.com/login</api>
+            <method>POST</method>
+            <body>{"username":$[#SUITE.user],"password":"password"} </body>
+            <headers>{"Content-Type":"application/json"}</headers>
+            <expected_status_code>200</expected_status_code>
+            <pre_variables>set $[#SUITE.user]="user"</pre_variables>
+            <post_variables>set $[#SUITE.auth]=$[#response.data.token];</post_variables>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        <!--In this testcase we are using suite variable set in post variable in above testcase and dependency tag is used to ensure that above testcase executes first irrespective of mode. Predefined function can also be used in post variables tag.-->
+        <testcase>
+            <name>PostVariables_PreDefinedFunctions_Testcase</name>
+            <category>Scenario Testcase</category>
+            <run_flag>Y</run_flag>
+            <dependency>PreVariables_PostAssertion_KeyCheck_Testcase</dependency>
+            <api>https://apis-beta.gemecosystem.com/module</api>
+            <method>POST</method>
+            <body>{"moduleName":$[#SUITE.moduleName],"route":"autolytics","icon":"autolytics","type":"CUSTOM"} </body>
+            <headers>{"Authorization": "Bearer $[#SUITE.auth]","Content-Type":"application/json"}</headers>
+            <expected_status_code>200,201</expected_status_code>
+            <pre_variables>set $[#SUITE.moduleName]=$[#unique(5)]</pre_variables>
+            <post_variables>set $[#SUITE.id]=$[#response.data.id];set $[#SUITE.moduleName]=$[#unique(5)];</post_variables>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        </testcases>
+</data>

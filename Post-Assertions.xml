@@ -1,0 +1,39 @@
+<data>
+        <suite>
+                <!--Here brigeToken and User are the jewel credentials-->
+                <project-name>GEMECO-API-PY</project-name>
+                <report-name>Pyprest Scenarios</report-name>
+                <environment>beta</environment>
+                <mode>optimize</mode>
+                <enter-point>https://apis-beta.gemecosystem.com</enter-point>
+                <jewel-user>user</jewel-user>
+                <jewel-bridge-token>bridge_token</jewel-bridge-token>
+        </suite>
+        <testcases>
+        <!--In this testcase to, in operator is used with string and list data for post assertion. Suite variable can also be used for comparison-->
+        <testcase>
+            <name>PostAssertion_Testcase</name>
+            <category>Scenario testcase</category>
+            <run_flag>Y</run_flag>
+            <api>https://apis-beta.gemecosystem.com/login</api>
+            <method>POST</method>
+            <body>{"username":$[#SUITE.user],"password":"password"} </body>
+            <headers>{"Content-Type":"application/json"}</headers>
+            <expected_status_code>200</expected_status_code>
+            <pre_variables>set $[#SUITE.user]="user"</pre_variables>
+            <post_assertion>compare response.data.username to $[#SUITE.user]; compare response.data.role in ["USER","DEV","ADMIN"]</post_assertion>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        <!--In this testcase boolean values are compared along with to and not to operator-->
+        <testcase>
+            <name>BooleanVariablesComparison_Testcase</name>
+            <category>Scenario Testcase</category>
+            <run_flag>Y</run_flag>
+            <api>https://apis.gemecosystem.com/validate/username?username=$[#SUITE.username]</api>
+            <method>GET</method>
+            <pre_variables>set $[#SUITE.username]=user</pre_variables>
+            <post_assertion>compare response.data.isPresent to True;compare response.message not to "User Does not Exists"</post_assertion>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        </testcases>
+</data>

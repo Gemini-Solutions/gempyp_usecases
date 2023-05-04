@@ -1,0 +1,29 @@
+<data>
+        <suite>
+                <!--Here brigeToken and User are the jewel credentials-->
+                <project-name>GEMECO-API-PY</project-name>
+                <report-name>Pyprest Scenarios</report-name>
+                <environment>beta</environment>
+                <mode>optimize</mode>
+                <enter-point>https://apis-beta.gemecosystem.com</enter-point>
+                <jewel-user>user</jewel-user>
+                <jewel-bridge-token>bridge_token</jewel-bridge-token>
+        </suite>
+        <testcases>
+        <!--In this testcase we have covered before and after method in which api,body,headers tag are left blank and they will be overwritten by before file content. And value of method tag will be replaced by the value provided in before file.In After file tag we are validating the response just for an example
+        Here expected status code have comma separated values-->
+        <testcase>
+            <name>BEFORE_AFTER_TESTCASE</name>
+            <category>Scenario Testcase</category>
+            <TYPE>PYPREST</TYPE>
+            <method>GET</method>
+            <api>""</api>
+            <body>""</body>
+            <headers>""</headers>
+            <before-file>path=S3:S3:https://apis-beta.gemecosystem.com/v1/download/file?id=geco-cloud-serv:GECO-TANYA:f7b6780b-687f-4885-b930-23deffe88547.py,class=beforeAfter,method=before_apiMethodBodyHeaders</before-file>
+            <after-file>path=S3:S3:https://apis-beta.gemecosystem.com/v1/download/file?id=geco-cloud-serv:GECO-TANYA:f7b6780b-687f-4885-b930-23deffe88547.py,class=beforeAfter,method=after_response_code</after-file>
+            <expected-status-code>201,200</expected-status-code>
+            <run-flag>Y</run-flag>
+        </testcase>
+        </testcases>
+</data>
