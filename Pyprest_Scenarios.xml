@@ -1,0 +1,90 @@
+<data>
+        <suite>
+                <!--Here brigeToken and User are the jewel credentials-->
+                <jewel-bridge-token>bridgeToken</jewel-bridge-token>
+                <jewel-user>User</jewel-user>
+                <project-name>GEMECO-API-PY</project-name>
+                <report-name>Pyprest Scenarios</report-name>
+                <mode>optimize</mode>
+                <enter-point>https://apis-beta.gemecosystem.com</enter-point>
+                <environment>beta</environment>
+        </suite>
+        <testcases>
+        <!--This testcase covers the scenario of prevariables, key check, post assertion and post variables. In post assertion to, in operator is used in this testcase.
+        Password: Encrypted password, user: username-->
+        <testcase>
+            <name>PreVariables_PostAssertion_KeyCheck_Testcase</name>
+            <category>Scenario testcase</category>
+            <run_flag>Y</run_flag>
+            <api>https://apis-beta.gemecosystem.com/login</api>
+            <method>POST</method>
+            <body>{"username":$[#SUITE.user],"password":"password"} </body>
+            <headers>{"Content-Type":"application/json"}</headers>
+            <expected_status_code>200</expected_status_code>
+            <pre_variables>set $[#SUITE.user]="user"</pre_variables>
+            <key_check>keys are response.data,response.data.firstName,response.data.lastName, response.data.company,response.data.avatar,response.data.token,response.data.username</key_check>
+            <post_variables>set $[#SUITE.auth]=$[#response.data.token];</post_variables>
+            <post_assertion>compare response.data.username to $[#SUITE.user]; compare response.data.role in ["USER","DEV","ADMIN"]</post_assertion>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        <!--In this testcase we are using suite variable set in post variable in above testcase and dependency tag is used to ensure that above testcase executes first irrespective of mode. Predefined function is used in this testcase.-->
+        <testcase>
+            <name>PostVariables_PreDefinedFunctions_Testcase</name>
+            <category>Scenario Testcase</category>
+            <run_flag>Y</run_flag>
+            <dependency>PreVariables_PostAssertion_KeyCheck_Testcase</dependency>
+            <api>https://apis-beta.gemecosystem.com/module</api>
+            <method>POST</method>
+            <body>{"moduleName":$[#SUITE.moduleName],"route":"autolytics","icon":"autolytics","type":"CUSTOM"} </body>
+            <headers>{"Authorization": "Bearer $[#SUITE.auth]","Content-Type":"application/json"}</headers>
+            <expected_status_code>200,201</expected_status_code>
+            <pre_variables>set $[#SUITE.moduleName]=$[#unique(5)]</pre_variables>
+            <key_check>keys are response.data.id,response.data.moduleName,response.data.route,response.data.icon,response.data.type,response.data.insertTime,response.data.updatedAt,response.operation,response.message</key_check>
+            <post_assertion>compare response.data.moduleName to $[#SUITE.moduleName];</post_assertion>
+            <post_variables>set $[#SUITE.id]=$[#response.data.id];set $[#SUITE.moduleName]=$[#unique(5)];</post_variables>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        <!--Poll-wait feature is covered in this testcase along with boolean variable comparison with to, not to operator in post assertion and expected status code i not provided so default value will be 200
+        user: username-->
+        <testcase>
+            <name>PollWait_BooleanVariablesComparison_Testcase</name>
+            <category>Scenario Testcase</category>
+            <run_flag>Y</run_flag>
+            <poll-wait>{"poll":2,"wait":10}</poll-wait>
+            <api>https://apis.gemecosystem.com/validate/username?username=$[#SUITE.username]</api>
+            <method>GET</method>
+            <pre_variables>set $[#SUITE.username]=user</pre_variables>
+            <post_assertion>compare response.data.isPresent to True;compare response.message not to "User Does not Exists"</post_assertion>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        <!--In this testcase we have covered before and after method in which api,body,headers tag are left blank and they will be overwritten by before file content. And value of method tag will be replaced by the value provided in before file.In After file tag we are validating the response just for an example
+        Here expected status code have comma separated values-->
+        <testcase>
+            <name>BEFORE_AFTER_TESTCASE</name>
+            <category>Scenario Testcase</category>
+            <TYPE>PYPREST</TYPE>
+            <method>GET</method>
+            <api>""</api>
+            <body>""</body>
+            <headers>""</headers>
+            <before-file>path=S3:S3:https://apis-beta.gemecosystem.com/v1/download/file?id=geco-cloud-serv:GECO-TANYA:f7b6780b-687f-4885-b930-23deffe88547.py,class=beforeAfter,method=before_apiMethodBodyHeaders</before-file>
+            <after-file>path=S3:S3:https://apis-beta.gemecosystem.com/v1/download/file?id=geco-cloud-serv:GECO-TANYA:f7b6780b-687f-4885-b930-23deffe88547.py,class=beforeAfter,method=after_response_code</after-file>
+            <expected-status-code>201,200</expected-status-code>
+            <run-flag>Y</run-flag>
+        </testcase>
+        <!--Here we are covering legacy comparison in which we have taken older version of the api as legacy-api and legay keyword is used to fetch the response feilds.-->
+        <testcase>
+            <name>Legacy_testcase</name>
+            <category>Scenario Testcase</category>
+            <run-flag>Y</run-flag>
+            <api>https://gorest.co.in/public/v2/users</api>
+            <method>GET</method>
+            <legacy-api>https://gorest.co.in/public/v1/users</legacy-api>
+            <legacy-method>GET</legacy-method>
+            <legacy-expected-status-code>200</legacy-expected-status-code>
+            <key-check>keys are legacy.meta,legacy.data[0].id,legacy.data[0].name,response[0].id,response[0].name</key-check>
+            <post-assertion>compare legacy.data[0].id to 679891; compare response[0].name to "Sen.Sushil Bharadwaj"</post-assertion>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        </testcases>
+</data>
