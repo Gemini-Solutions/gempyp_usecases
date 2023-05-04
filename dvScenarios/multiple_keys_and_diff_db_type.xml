@@ -1,0 +1,27 @@
+<data>
+    <suite>
+        <environment>Beta</environment>
+        <project_name>xxxxxxxxxxxxxxxxxxxxx</project_name>
+        <report_name>DV_FEATURES</report_name>
+        <mode>Sequence</mode>
+        <jewel_user>xxxxxxxxxxxxxxx</jewel_user>
+        <jewel-bridge-token>xxxxxxxxxxxxxxxxxxxxxxxx</jewel-bridge-token>
+    </suite>
+    <testcases>
+        <testcase>
+            <name>MULTIPLE KEYS AND DIFF SOURCE DB</name>
+            <run_flag>N</run_flag>
+            <source_db>mysql</source_db>
+            <type>dv</type>
+            <source_conn>source</source_conn>
+            <target_conn>mysql.connector.connect(host='xxxxxxxxxxxxxxx',user='xxxxxxx', password='xxxxxx',database='xxxxxxxxxxxxx',port=3306)</target_conn>
+            <target_db>custom</target_db>
+            <source_sql>SELECT * from dv_schema_source.src20knew_csv</source_sql>
+            <target_sql>SELECT * from dv_schema_target.tgt30knew_csv</target_sql>
+            <keys>ID,Location</keys>
+            <match_case>Department</match_case>
+            <column_map>{'Emp_ID':'ID'}</column_map>
+            <db_config_path>./dv.conf</db_config_path>
+        </testcase>
+    </testcases>
+</data>

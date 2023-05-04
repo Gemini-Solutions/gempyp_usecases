@@ -1,0 +1,26 @@
+<data>
+    <suite>
+        <environment>Beta</environment>
+        <project_name>xxxxxxxxxxxxxxxxxxxxx</project_name>
+        <report_name>DV_FEATURES</report_name>
+        <mode>Sequence</mode>
+        <jewel_user>xxxxxxxxxxxxxxx</jewel_user>
+        <jewel-bridge-token>xxxxxxxxxxxxxxxxxxxxxxxx</jewel-bridge-token>
+    </suite>
+    <testcases>
+<testcase>
+            <name>snowflake DB</name>
+            <category>dv</category>
+            <type>DV</type>
+            <run_flag>N</run_flag>
+            <target_conn>snowflake.connector.connect(user="xxxxxxxxxx",password="xxxxxxxxxx",account="xxxx.ap-south-1",warehouse='COMPUTE_WH',database="SNOWFLAKE_SAMPLE_DATA",schema="TPCH_SF100")</target_conn>
+            <keys>S_ACCTBAL</keys>
+            <target_sql>SELECT * from SUPPLIER</target_sql>
+            <source_db>custom</source_db>
+            <source_conn>snowflake.connector.connect(user="xxxxxxxxx",password="xxxxxxxxxx",account="xxxxxxxxxxx.ap-south-1",warehouse='COMPUTE_WH',database="SNOWFLAKE_SAMPLE_DATA",schema="TPCH_SF100")</source_conn>
+            <source_sql>SELECT * from SUPPLIER</source_sql>
+            <target_db>custom</target_db>
+        </testcase>
+        
+    </testcases>
+</data>
