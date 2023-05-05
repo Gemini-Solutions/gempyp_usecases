@@ -1,0 +1,26 @@
+<data>
+    <suite>
+        <environment>Beta</environment>
+        <project_name>xxxxxxxxxxxxxxxxxxxxx</project_name>
+        <report_name>DV_FEATURES</report_name>
+        <mode>Sequence</mode>
+        <jewel_user>xxxxxxxxxxxxxxx</jewel_user>
+        <jewel-bridge-token>xxxxxxxxxxxxxxxxxxxxxxxx</jewel-bridge-token>
+    </suite>
+    <testcases>
+        <testcase>
+            <name>MATCH_CASE</name>
+            <type>DV</type>
+            <run_flag>N</run_flag>
+            <target_conn>mysql.connector.connect(host='xxxxxxxxx',user='xxxxxxx', password='xxxxxxxxx',database='xxxxxxxxxxx',port=3306)</target_conn>
+            <column_map>{'Emp_ID':'ID'}</column_map>
+            <keys>ID</keys>
+            <target_sql>SELECT * from dv_schema_target.tgt30knew_csv</target_sql>
+            <source_db>custom</source_db>
+            <source_conn>mysql.connector.connect(host='xxxxxxxxx',user='xxxxxxx', password='xxxxxxxxxx',database='xxxxxxxxxxx',port=3306)</source_conn>
+            <source_sql>SELECT * from dv_schema_source.src20knew_csv</source_sql>
+            <target_db>custom</target_db>
+            <match_case>Gender</match_case>
+        </testcase>
+    </testcases>
+</data>

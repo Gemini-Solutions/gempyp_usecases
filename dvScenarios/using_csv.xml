@@ -1,0 +1,21 @@
+<data>
+    <suite>
+        <environment>Beta</environment>
+        <project_name>xxxxxxxxxxxxxxxxxxxxx</project_name>
+        <report_name>DV_FEATURES</report_name>
+        <mode>Sequence</mode>
+        <jewel_user>xxxxxxxxxxxxxxx</jewel_user>
+        <jewel-bridge-token>xxxxxxxxxxxxxxxxxxxxxxxx</jewel-bridge-token>
+    </suite>
+    <testcases>
+        <testcase>
+            <name>CSV FILE</name>
+            <run_flag>N</run_flag>
+            <type>dv</type>
+            <source_csv>./src20knew.csv</source_csv>
+            <target_csv>./tgt30knew.csv</target_csv>
+            <keys>ID</keys>
+            <skip_column>Name,Emp_Name</skip_column>
+        </testcase>
+    </testcases>
+</data>

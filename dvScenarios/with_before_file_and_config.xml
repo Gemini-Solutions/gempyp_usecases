@@ -1,0 +1,28 @@
+<data>
+    <suite>
+        <environment>Beta</environment>
+        <project_name>xxxxxxxxxxxxxxxxxxxxx</project_name>
+        <report_name>DV_FEATURES</report_name>
+        <mode>Sequence</mode>
+        <jewel_user>xxxxxxxxxxxxxxx</jewel_user>
+        <jewel-bridge-token>xxxxxxxxxxxxxxxxxxxxxxxx</jewel-bridge-token>
+    </suite>
+    <testcases>
+        <testcase>
+            <name>WITH BEFORE FILE AND CONFIG</name>
+            <category>dv</category>
+            <type>DV</type>
+            <run_flag>N</run_flag>
+            <before_file>path=./beforeAfter.py,class=BeforeAfter,method=before</before_file>
+            <target_conn>target</target_conn>
+            <column_map>{'Emp_ID':'ID'}</column_map>
+            <keys>ID</keys>
+            <db_config_path>C:\Users\sachin.chand\Desktop\test1\config.conf</db_config_path>
+            <target_sql>SELECT * from dv_schema_target.tgt30knew_csv</target_sql>
+            <source_db>mysql</source_db>
+            <source_conn>source</source_conn>
+            <source_sql>SELECT * from dv_schema_source.src20knew_csv</source_sql>
+            <target_db>mysql</target_db>
+        </testcase>
+    </testcases>
+</data>
