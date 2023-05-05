@@ -1,0 +1,28 @@
+<data>
+        <suite>
+                <!--Here brigeToken and User are the jewel credentials-->
+                <project-name>GEMECO-API-PY</project-name>
+                <report-name>Pyprest Scenarios</report-name>
+                <environment>beta</environment>
+                <mode>optimize</mode>
+                <enter-point>https://apis-beta.gemecosystem.com</enter-point>
+                <jewel-user>user</jewel-user>
+                <jewel-bridge-token>bridge_token</jewel-bridge-token>
+        </suite>
+        <testcases>
+        <!--This testcase covers the scenario of prevariables.PreVariables can be suite variables or local variables.
+        Password: Encrypted password, user: username-->
+        <testcase>
+            <name>PreVariables_Testcase</name>
+            <category>Scenario testcase</category>
+            <run-flag>Y</run-flag>
+            <api>https://apis-beta.gemecosystem.com/$[#apiEndpoint]</api>
+            <method>POST</method>
+            <body>{"username":$[#SUITE.user],"password":"password"} </body>
+            <headers>{"Content-Type":"application/json"}</headers>
+            <expected-status-code>200</expected-status-code>
+            <pre-variables>set $[#SUITE.user]="user"; set $[#apiEndpoint]=login</pre-variables>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        </testcases>
+</data>

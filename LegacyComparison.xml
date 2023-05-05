@@ -1,0 +1,28 @@
+<data>
+        <suite>
+                <!--Here brigeToken and User are the jewel credentials-->
+                <project-name>GEMECO-API-PY</project-name>
+                <report-name>Pyprest Scenarios</report-name>
+                <environment>beta</environment>
+                <mode>optimize</mode>
+                <enter-point>https://apis-beta.gemecosystem.com</enter-point>
+                <jewel-user>user</jewel-user>
+                <jewel-bridge-token>bridge_token</jewel-bridge-token>
+        </suite>
+        <testcases>
+        <!--Here we are covering legacy comparison in which we have taken older version of the api as legacy-api and legay keyword is used to fetch the response feilds.-->
+        <testcase>
+            <name>Legacy_testcase</name>
+            <category>Scenario Testcase</category>
+            <run-flag>Y</run-flag>
+            <api>https://gorest.co.in/public/v2/users</api>
+            <method>GET</method>
+            <legacy-api>https://gorest.co.in/public/v1/users</legacy-api>
+            <legacy-method>GET</legacy-method>
+            <legacy-expected-status-code>200</legacy-expected-status-code>
+            <key-check>keys are legacy.meta,legacy.data[0].id,legacy.data[0].name,response[0].id,response[0].name</key-check>
+            <post-assertion>compare legacy.data[0].id to 679891; compare response[0].name to "Sen.Sushil Bharadwaj"</post-assertion>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        </testcases>
+</data>

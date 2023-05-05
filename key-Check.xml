@@ -1,0 +1,38 @@
+<data>
+        <suite>
+                <!--Here brigeToken and User are the jewel credentials-->
+                <project-name>GEMECO-API-PY</project-name>
+                <report-name>Pyprest Scenarios</report-name>
+                <environment>beta</environment>
+                <mode>optimize</mode>
+                <enter-point>https://apis-beta.gemecosystem.com</enter-point>
+                <jewel-user>user</jewel-user>
+                <jewel-bridge-token>bridge_token</jewel-bridge-token>
+        </suite>
+        <testcases>
+        <!--In this testcase response contain single field and multiple key checks are separated by comma-->
+            <testcase>
+            <name>KeyCheck_Testcase</name>
+            <category>Scenario testcase</category>
+            <run_flag>Y</run_flag>
+            <api>https://apis-beta.gemecosystem.com/login</api>
+            <method>POST</method>
+            <body>{"username":$[#SUITE.user],"password":"password"} </body>
+            <headers>{"Content-Type":"application/json"}</headers>
+            <expected_status_code>200</expected_status_code>
+            <pre_variables>set $[#SUITE.user]="user"</pre_variables>
+            <key_check>keys are response.data,response.data.firstName,response.data.lastName, response.data.company,response.data.avatar,response.data.token,response.data.username</key_check>
+            <TYPE>PYPREST</TYPE>
+            </testcase>
+        <!--In this testcase response is a list of fields so index is used-->
+            <testcase>
+            <name>KeyCheck_ListOfResponse_Testcase</name>
+            <category>Scenario Testcase</category>
+            <run-flag>Y</run-flag>
+            <api>https://gorest.co.in/public/v2/users</api>
+            <method>GET</method>
+            <key-check>keys are response[0].id,response[0].name</key-check>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        </testcases>
+</data>

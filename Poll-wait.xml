@@ -1,0 +1,27 @@
+<data>
+        <suite>
+                <!--Here brigeToken and User are the jewel credentials-->
+                <project-name>GEMECO-API-PY</project-name>
+                <report-name>Pyprest Scenarios</report-name>
+                <environment>beta</environment>
+                <mode>optimize</mode>
+                <jewel-bridge-token>bridgeToken</jewel-bridge-token>
+                <jewel-user>User</jewel-user>
+                <enter-point>https://apis-beta.gemecosystem.com</enter-point>
+        </suite>
+        <testcases>
+        <!--Poll-wait feature is covered in this testcase
+        user: username
+        Syntax of poll-wait: {"poll":number of times to execute,"wait":wait time}-->
+            <testcase>
+            <name>PollWait_Testcase</name>
+            <category>Scenario Testcase</category>
+            <run_flag>Y</run_flag>
+            <poll-wait>{"poll":2,"wait":10}</poll-wait>
+            <api>https://apis.gemecosystem.com/validate/username?username=$[#SUITE.username]</api>
+            <method>GET</method>
+            <pre-variables>set $[#SUITE.username]=user</pre-variables>
+            <TYPE>PYPREST</TYPE>
+            </testcase>
+        </testcases>
+</data>
