@@ -20,8 +20,8 @@
             <api>""</api>
             <body>""</body>
             <headers>""</headers>
-            <before-file>path=S3:S3:https://apis-beta.gemecosystem.com/v1/download/file?id=geco-cloud-serv:GECO-TANYA:f7b6780b-687f-4885-b930-23deffe88547.py,class=beforeAfter,method=before_apiMethodBodyHeaders</before-file>
-            <after-file>path=S3:S3:https://apis-beta.gemecosystem.com/v1/download/file?id=geco-cloud-serv:GECO-TANYA:f7b6780b-687f-4885-b930-23deffe88547.py,class=beforeAfter,method=after_response_code</after-file>
+            <before-file>path=S3:https://apis-beta.gemecosystem.com/v1/download/file?id=geco-cloud-serv:GECO-TANYA:BeforeSampleFile (1).py,class=beforeAfter,method=before_apiMethodBodyHeaders</before-file>
+            <after-file>path=S3:https://apis-beta.gemecosystem.com/v1/download/file?id=geco-cloud-serv:GECO-TANYA:BeforeSampleFile (1).py,class=beforeAfter,method=after_response_code</after-file>
             <expected-status-code>201,200</expected-status-code>
             <run-flag>Y</run-flag>
         </testcase>
